@@ -31,6 +31,5 @@ class PasswordGenerator:
     def set_password(self, length):
         self.length = length
 
-if __name__ == "__main__":
-    pwd = PasswordGenerator(12)
-    password = pwd.generate_password()
+pwd = PasswordGenerator(12)
+password = pwd.generate_password()
