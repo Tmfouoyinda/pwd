@@ -1,35 +1,29 @@
-import random
+import secrets
 import string
 
+long = int(input("Longueur du mdp : "))
 
-class PasswordGenerator:
-    def __init__(self, length=12):
-        self.length = length
+if long <= 4:
+    print("Il faut minimum 4 caracteres ")
+    exit()
 
-    def generate_password(self):
-        print(f"Le mot de passe que vous souhaitez génerer contiendra {self.length} caractères aléatoires.", )
-        print(f"Longueur du mot de passe {self.length}. Entrez une nouvelle valeur ou appuyez la touche Entrée.",)
-        choice = input("")
+mdp = [
+    secrets.choice(string.ascii_lowercase),secrets.choice(string.ascii_uppercase),
+    secrets.choice(string.digits),secrets.choice(string.punctuation),
+]
 
-        while True:
-            try :
+#complet
+caracteres = (
+        string.ascii_lowercase +
+        string.ascii_uppercase +
+        string.digits +
+        string.punctuation
+)
 
-                if choice == '':
-                    choice = 0
 
-                choice = int(choice)
-                break
-            except ValueError:
-                print("Le nombre n'est pas valide")
-                continue
+for i in range(long - 4):
+    mdp.append(secrets.choice(caracteres))
 
-        characters = string.ascii_letters + string.digits + string.punctuation
-        pwd = ''.join(random.choice(characters) for _ in range(self.length))
-        print(pwd)
-        return pwd
-
-    def set_password(self, length):
-        self.length = length
-
-pwd = PasswordGenerator(12)
-password = pwd.generate_password()
+secrets.SystemRandom().shuffle(mdp)
+print("Mot de passe Ultra-securise:")
+print("".join(mdp))
